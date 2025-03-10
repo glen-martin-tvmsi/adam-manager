@@ -1,13 +1,17 @@
-import json, argparse
+import json
+import argparse
 
 def build_knowledge_graph(file_tree):
     graph = {"nodes": [], "edges": []}
     
-    # Add nodes for files in the filesystem tree.
-    for item in file_tree.get("contents", []):
-        graph["nodes"].append({"id": item["name"], "type": item["type"]})
+    # Handle both dictionary and list inputs
+    contents = file_tree.get("contents", []) if isinstance(file_tree, dict) else file_tree
     
-        # Example edge creation (customize as needed).
+    # Add nodes for files and directories
+    for item in contents:
+        graph["nodes"].append({"id": item["name"], "type": item["type"]})
+        
+        # Example edge creation (customize as needed)
         if item["type"] == "file":
             graph["edges"].append({"source": item["name"], "target": "root_directory"})
     
@@ -21,11 +25,14 @@ def main():
     
     args = parser.parse_args()
     
+    # Load input JSON file
     with open(args.input, 'r') as f:
         file_tree = json.load(f)
     
+    # Build knowledge graph
     knowledge_graph = build_knowledge_graph(file_tree)
     
+    # Write output JSON file
     with open(args.output, 'w') as f:
         json.dump(knowledge_graph, f, indent=2)
     

@@ -37,8 +37,7 @@ check_deps() {
 
 analyze_filesystem() {
     echo "📂 Analyzing file structure..."
-    tree -a -I '.git|node_modules|venv|__pycache__' -L 3 > "$TEMP_DIR/file_tree.txt"
-    cat "$TEMP_DIR/file_tree.txt" # Debugging output
+    tree -a -I '.git|node_modules|venv|__pycache__' -L 3 -J > "$TEMP_DIR/file_tree.json"
 }
 
 
