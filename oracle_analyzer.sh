@@ -6,8 +6,16 @@ set -eo pipefail
 
 # Configuration
 OUTPUT_FILE="./oracle_report.json"
-TEMP_DIR=$(mktemp -d -t adam-oracle-XXXXXX)
+TEMP_DIR="/tmp/adam-oracle"  # Consistent temporary directory path
 trap 'rm -rf "$TEMP_DIR"' EXIT
+
+# Ensure the temporary directory exists and is clean
+prepare_temp_dir() {
+    if [ -d "$TEMP_DIR" ]; then
+        rm -rf "$TEMP_DIR"
+    fi
+    mkdir -p "$TEMP_DIR"
+}
 
 # Dependency checks
 check_deps() {
@@ -36,8 +44,12 @@ analyze_filesystem() {
 
 analyze_codebase() {
     echo "📊 Calculating code metrics..."
-    cloc --quiet --json . 2>/dev/null > "$TEMP_DIR/cloc.json"
+    cloc --quiet --json . > "$TEMP_DIR/cloc.json"
+    
+    # File type breakdown (debugging)
+    find . -type f | awk -F. '{print $NF}' | sort | uniq -c > "$TEMP_DIR/file_types.txt"
 }
+
 
 analyze_dependencies() {
     echo "🧩 Identifying dependencies..."
@@ -60,23 +72,31 @@ analyze_dependencies() {
 }
 
 
+
 analyze_environment() {
     echo "🔧 Detecting environment configuration..."
     {
-        grep -rhE '^export [A-Z_]' .env* 2>/dev/null || true
-        find . -type f \( -name '*docker*' -o -name '*compose*' \) -exec grep -hiE 'ENV [A-Z_]+' {} + 2>/dev/null || true
-    } | sort -u > "$TEMP_DIR/env_vars.txt"
+        find . -type f \( -name "*.env" \) -exec cat {} + || true
+        env | grep -E '^[A-Z_]+=' || true
+    } > "$TEMP_DIR/env_vars.txt"
 }
+
 
 analyze_architecture() {
     echo "🏗 Inferring system architecture..."
     {
-        # Docker analysis
-        find . -type f \( -name 'Dockerfile*' -o -name '*compose*.yml' \) -exec grep -hiE 'FROM|image:' {} +
-        
-        # Service endpoints
-        find . -type f \( -name '*.js' -o -name '*.py' -o -name '*.yaml' \) -exec grep -hiE 'http(s)?://[^"'\'' ]+' {} +
-    } 2>/dev/null | sort -u > "$TEMP_DIR/architecture.txt"
+        find . -type f \( -name "Dockerfile*" -o -name "*.yml" \) \
+            -exec grep -hiE 'FROM|image:' {} + || true
+    } > "$TEMP_DIR/architecture.txt"
+}
+
+
+generate_knowledge_graph() {
+    echo "🧠 Generating knowledge graph..."
+    
+    # Call the Python script and save its output to a temporary file.
+    python3 codebase_knowledge_graph.py --input "$TEMP_DIR/file_tree.json" \
+                                        --output "$TEMP_DIR/knowledge_graph.json"
 }
 
 analyze_git() {
@@ -84,10 +104,12 @@ analyze_git() {
         git branch > "$TEMP_DIR/git_branches.txt"
         git log --oneline > "$TEMP_DIR/git_commits.txt"
         git status --short > "$TEMP_DIR/git_status.txt"
+        git diff --cached > "$TEMP_DIR/git_staged_diff.txt"
     else
         echo "No Git repository found."
     fi
 }
+
 
 generate_report() {
     echo "📦 Synthesizing final report..."
@@ -114,6 +136,7 @@ report = {
         "user": os.getenv("USER"),
         "timestamp": $(date +%s)
     }
+    "knowledge_graph": load_file("$TEMP_DIR/knowledge_graph.json"),
 }
 
 with open("$OUTPUT_FILE", "w") as f:
@@ -126,6 +149,7 @@ EOF
 # Main execution flow
 main() {
     check_deps
+    prepare_temp_dir  # Ensure consistent temp directory setup
     
     echo "🔍 Adam Oracle Analysis Started"
     echo "📁 Project Directory: $(pwd)"
@@ -137,6 +161,7 @@ main() {
     analyze_environment
     analyze_architecture
     analyze_git
+    generate_knowledge_graph  
     
     generate_report
     
