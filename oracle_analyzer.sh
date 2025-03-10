@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Adam OS Project Oracle - v1.8
+# Adam OS Project Oracle - v1.9
 
 set -eo pipefail
 
 # Configuration
-OUTPUT_FILE="./oracle_report.json"
+CURRENT_DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+OUTPUT_DIR="./oracle_output"
+OUTPUT_FILE="$OUTPUT_DIR/oracle_report_$CURRENT_DATE.json"
 TEMP_DIR="/tmp/adam-oracle"  # Consistent temporary directory path
 
 # Ensure the temporary directory exists and is clean
@@ -15,6 +17,15 @@ prepare_temp_dir() {
     fi
     mkdir -p "$TEMP_DIR"
     echo "✅ Temporary directory prepared."
+}
+
+# Ensure the output directory exists
+prepare_output_dir() {
+    echo "🛠 Preparing output directory at $OUTPUT_DIR..."
+    if [ ! -d "$OUTPUT_DIR" ]; then
+        mkdir -p "$OUTPUT_DIR"
+    fi
+    echo "✅ Output directory prepared."
 }
 
 # Dependency checks
@@ -86,16 +97,9 @@ analyze_dependencies() {
 analyze_environment() {
     echo "🔧 Detecting environment configuration..."
     {
-        # Capture environment variables but exclude sensitive ones
-        env | grep -E '^[A-Z_]+=' | grep -vE '_TOKEN|_KEY|PASSWORD|SECRET' || true
+        env | grep -E '^[A-Z_]+=' | \
+        grep -vE '_TOKEN|_KEY|PASSWORD|SECRET|GITHUB|VSCODE|CODESPACE|AWS_|AZURE_|GOOGLE_' || true
     } > "$TEMP_DIR/env_vars.txt"
-    
-    if [ ! -f "$TEMP_DIR/env_vars.txt" ]; then
-        echo "❌ Failed to create env_vars.txt!"
-        exit 1
-    fi
-    
-    echo "✅ Environment configuration analysis complete. Output saved to $TEMP_DIR/env_vars.txt."
 }
 
 
@@ -156,7 +160,7 @@ print(f"Report written to: {os.path.abspath('$OUTPUT_FILE')}")
 EOF
 
 if [ ! -f "$OUTPUT_FILE" ]; then
-    echo "❌ Failed to create oracle_report.json!"
+    echo "❌ Failed to create oracle_report_$CURRENT_DATE.json!"
 else
     echo "✅ Final report created successfully at $OUTPUT_FILE."
 fi
@@ -166,6 +170,8 @@ main() {
     check_deps
     
     prepare_temp_dir  # Ensure consistent temp directory setup
+    
+    prepare_output_dir  # Ensure output directory setup
     
     echo "🔍 Adam Oracle Analysis Started"
     
