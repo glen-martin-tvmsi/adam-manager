@@ -1,0 +1,50 @@
+{
+  "filesystem": null,
+  "code_metrics": {
+    "header": {
+      "cloc_url": "github.com/AlDanial/cloc",
+      "cloc_version": "1.82",
+      "elapsed_seconds": 0.0118880271911621,
+      "n_files": 6,
+      "n_lines": 1008,
+      "files_per_second": 504.709478159721,
+      "lines_per_second": 84791.1923308331
+    },
+    "Markdown": {
+      "nFiles": 3,
+      "blank": 152,
+      "comment": 0,
+      "code": 501
+    },
+    "Bourne Shell": {
+      "nFiles": 2,
+      "blank": 47,
+      "comment": 18,
+      "code": 202
+    },
+    "JSON": {
+      "nFiles": 1,
+      "blank": 0,
+      "comment": 0,
+      "code": 88
+    },
+    "SUM": {
+      "blank": 199,
+      "comment": 18,
+      "code": 791,
+      "nFiles": 6
+    }
+  },
+  "dependencies": {
+    "node": null,
+    "python": null
+  },
+  "environment": "",
+  "architecture": "",
+  "git_state": null,
+  "system": {
+    "cwd": "/workspaces/adam-manager",
+    "user": "codespace",
+    "timestamp": 1741611795
+  }
+}

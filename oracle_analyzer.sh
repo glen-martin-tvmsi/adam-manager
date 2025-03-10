@@ -5,7 +5,7 @@
 set -eo pipefail
 
 # Configuration
-OUTPUT_FILE="${OUTPUT_FILE:-oracle_report.json}"
+OUTPUT_FILE="./oracle_report.json"
 TEMP_DIR=$(mktemp -d -t adam-oracle-XXXXXX)
 trap 'rm -rf "$TEMP_DIR"' EXIT
 
@@ -27,11 +27,12 @@ check_deps() {
     fi
 }
 
-# Main analysis functions
 analyze_filesystem() {
     echo "📂 Analyzing file structure..."
-    tree -a -I '.git|node_modules|venv|.venv|__pycache__' -L 3 -J 2>/dev/null > "$TEMP_DIR/file_tree.json"
+    tree -a -I '.git|node_modules|venv|__pycache__' -L 3 > "$TEMP_DIR/file_tree.txt"
+    cat "$TEMP_DIR/file_tree.txt" # Debugging output
 }
+
 
 analyze_codebase() {
     echo "📊 Calculating code metrics..."
@@ -41,16 +42,23 @@ analyze_codebase() {
 analyze_dependencies() {
     echo "🧩 Identifying dependencies..."
     
-    # Node.js
+    # Node.js dependencies
     if [ -f "package.json" ]; then
-        jq '{dependencies: .dependencies, devDependencies: .devDependencies}' package.json > "$TEMP_DIR/node_deps.json"
+        jq '.dependencies' package.json > "$TEMP_DIR/node_deps.json"
+        echo "Node.js dependencies detected."
+    else
+        echo "No package.json found."
     fi
 
-    # Python
+    # Python dependencies
     if [ -f "requirements.txt" ]; then
-        pip freeze --local | awk -F= '{print $1}' > "$TEMP_DIR/python_deps.txt"
+        pip freeze > "$TEMP_DIR/python_deps.txt"
+        echo "Python dependencies detected."
+    else
+        echo "No requirements.txt found."
     fi
 }
+
 
 analyze_environment() {
     echo "🔧 Detecting environment configuration..."
@@ -73,24 +81,18 @@ analyze_architecture() {
 
 analyze_git() {
     if [ -d ".git" ]; then
-        echo "🔄 Analyzing repository history..."
-        {
-            echo "## Branches ##"
-            git branch -av
-            
-            echo "## Recent Commits ##"
-            git log --oneline -n 5
-            
-            echo "## Status ##"
-            git status -s
-        } > "$TEMP_DIR/git_state.txt"
+        git branch > "$TEMP_DIR/git_branches.txt"
+        git log --oneline > "$TEMP_DIR/git_commits.txt"
+        git status --short > "$TEMP_DIR/git_status.txt"
+    else
+        echo "No Git repository found."
     fi
 }
 
 generate_report() {
     echo "📦 Synthesizing final report..."
     python3 - <<EOF
-import json, os, sys
+import json, os
 
 def load_file(path):
     if not os.path.exists(path): return None
@@ -116,6 +118,8 @@ report = {
 
 with open("$OUTPUT_FILE", "w") as f:
     json.dump(report, f, indent=2)
+
+print(f"Report written to: {os.path.abspath('$OUTPUT_FILE')}")
 EOF
 }
 
