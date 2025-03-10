@@ -86,8 +86,8 @@ analyze_dependencies() {
 analyze_environment() {
     echo "🔧 Detecting environment configuration..."
     {
-        find . -type f \( -name "*.env" \) -exec cat {} + || true
-        env | grep -E '^[A-Z_]+=' || true
+        # Capture environment variables but exclude sensitive ones
+        env | grep -E '^[A-Z_]+=' | grep -vE '_TOKEN|_KEY|PASSWORD|SECRET' || true
     } > "$TEMP_DIR/env_vars.txt"
     
     if [ ! -f "$TEMP_DIR/env_vars.txt" ]; then
@@ -97,6 +97,7 @@ analyze_environment() {
     
     echo "✅ Environment configuration analysis complete. Output saved to $TEMP_DIR/env_vars.txt."
 }
+
 
 analyze_architecture() {
     echo "🏗 Inferring system architecture..."

@@ -1,14 +1,66 @@
 {
-  "filesystem": null,
+  "filesystem": [
+    {
+      "type": "directory",
+      "name": ".",
+      "contents": [
+        {
+          "type": "file",
+          "name": ".gitignore"
+        },
+        {
+          "type": "file",
+          "name": "LICENSE"
+        },
+        {
+          "type": "file",
+          "name": "README.md"
+        },
+        {
+          "type": "file",
+          "name": "codebase_knowledge_graph.py"
+        },
+        {
+          "type": "file",
+          "name": "oracle_analyzer.sh"
+        },
+        {
+          "type": "file",
+          "name": "oracle_config.env"
+        },
+        {
+          "type": "file",
+          "name": "oracle_report.json"
+        },
+        {
+          "type": "file",
+          "name": "oracle_spec.md"
+        },
+        {
+          "type": "file",
+          "name": "setup_env.sh"
+        },
+        {
+          "type": "file",
+          "name": "team_spec.md"
+        }
+      ]
+    },
+    {
+      "type": "report",
+      "directories": 0,
+      "files": 10
+    }
+  ],
   "code_metrics": {
     "header": {
       "cloc_url": "github.com/AlDanial/cloc",
       "cloc_version": "1.82",
-      "elapsed_seconds": 0.0118880271911621,
-      "n_files": 6,
-      "n_lines": 1008,
-      "files_per_second": 504.709478159721,
-      "lines_per_second": 84791.1923308331
+      "elapsed_seconds": 0.00860691070556641,
+      "n_files": 7,
+      "n_lines": 1110,
+      "files_per_second": 813.299944598338,
+      "lines_per_second": 128966.134072022
     },
     "Markdown": {
       "nFiles": 3,
@@ -18,33 +70,33 @@
     },
     "Bourne Shell": {
       "nFiles": 2,
-      "blank": 47,
-      "comment": 18,
-      "code": 202
+      "blank": 61,
+      "comment": 15,
+      "code": 214
     },
     "JSON": {
       "nFiles": 1,
       "blank": 0,
       "comment": 0,
-      "code": 88
+      "code": 102
+    },
+    "Python": {
+      "nFiles": 1,
+      "blank": 21,
+      "comment": 9,
+      "code": 35
     },
     "SUM": {
-      "blank": 199,
-      "comment": 18,
-      "code": 791,
-      "nFiles": 6
+      "blank": 234,
+      "comment": 24,
+      "code": 852,
+      "nFiles": 7
     }
   },
   "dependencies": {
     "node": null,
     "python": null
   },
-  "environment": "",
-  "architecture": "",
-  "git_state": null,
-  "system": {
-    "cwd": "/workspaces/adam-manager",
-    "user": "codespace",
-    "timestamp": 1741611795
-  }
+  "environment": "SHELL=/bin/bash\nNUGET_XMLDOC_MODE=skip\nCOLORTERM=truecolor\nVSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/codespace/.vscode-remote/extensions/ms-python.debugpy-2025.4.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-01a76aefa4681567.txt\nCLOUDENV_ENVIRONMENT_ID=cc659972-877d-4950-9430-be5cf2b1947b\nNVM_INC=/usr/local/share/nvm/versions/node/v20.18.1/include/node\nTERM_PROGRAM_VERSION=1.98.0\nGITHUB_USER=glen-martin-tvmsi\nCODESPACE_NAME=obscure-space-carnival-x5r4g6gq55qjc9xrx\nHOSTNAME=codespaces-8ef2d2\nJAVA_ROOT=/home/codespace/java\nJAVA_HOME=/usr/local/sdkman/candidates/java/current\nDOTNET_ROOT=/usr/share/dotnet\nCODESPACES=true\nGRADLE_HOME=/usr/local/sdkman/candidates/gradle/current\nPYTHON_ROOT=/home/codespace/.python\nNVS_DIR=/usr/local/nvs\nNVS_OS=linux\nPYDEVD_DISABLE_FILE_VALIDATION=1\nDOTNET_SKIP_FIRST_TIME_EXPERIENCE=1\nMY_RUBY_HOME=/usr/local/rvm/rubies/ruby-3.3.4\nNVS_USE_XZ=1\nSDKMAN_CANDIDATES_DIR=/usr/local/sdkman/candidates\nRUBY_VERSION=ruby-3.3.4\nPIPX_BIN_DIR=/usr/local/py-utils/bin\nPWD=/workspaces/adam-manager\nORYX_DIR=/usr/local/oryx\nBUNDLED_DEBUGPY_PATH=/home/codespace/.vscode-remote/extensions/ms-python.debugpy-2025.4.0-linux-x64/bundled/libs/debugpy\nVSCODE_GIT_ASKPASS_NODE=/vscode/bin/linux-x64/6609ac3d66f4eade5cf376d1cb76f13985724bcb/node\nHUGO_ROOT=/home/codespace/.hugo\nGITHUB_CODESPACES_PORT_FORWARDING_DOMAIN=app.github.dev\nNPM_GLOBAL=/home/codespace/.npm-global\nHOME=/home/codespace\nGITHUB_API_URL=https://api.github.com\nLANG=C.UTF-8\nLS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:\nDYNAMIC_INSTALL_ROOT_DIR=/opt\nNVM_SYMLINK_CURRENT=true\nPHP_PATH=/usr/local/php/current\nDEBIAN_FLAVOR=focal-scm\nGIT_ASKPASS=/vscode/bin/linux-x64/6609ac3d66f4eade5cf376d1cb76f13985724bcb/extensions/git/dist/askpass.sh\nPHP_ROOT=/home/codespace/.php\nORYX_ENV_TYPE=vsonline-present\nHUGO_DIR=/usr/local/hugo/bin\nDOCKER_BUILDKIT=1\nGOROOT=/usr/local/go\nINTERNAL_VSCS_TARGET_URL=https://centralindia.online.visualstudio.com\nSHELL_LOGGED_IN=true\nPYTHON_PATH=/usr/local/python/current\nNVM_DIR=/usr/local/share/nvm\nVSCODE_GIT_ASKPASS_EXTRA_ARGS=\nGEM_PATH=/usr/local/rvm/gems/ruby-3.3.4:/usr/local/rvm/gems/ruby-3.3.4@global\nGEM_HOME=/usr/local/rvm/gems/ruby-3.3.4\nLESSCLOSE=/usr/bin/lesspipe %s %s\nNVS_ROOT=/usr/local/nvs\nGITHUB_GRAPHQL_URL=https://api.github.com/graphql\nTERM=xterm-256color\nLESSOPEN=| /usr/bin/lesspipe %s\nUSER=codespace\nNODE_ROOT=/home/codespace/nvm\nVSCODE_GIT_IPC_HANDLE=/tmp/vscode-git-6e651339c3.sock\nPYTHONIOENCODING=UTF-8\nGITHUB_SERVER_URL=https://github.com\nPIPX_HOME=/usr/local/py-utils\nNVS_HOME=/usr/local/nvs\nCONDA_SCRIPT=/opt/conda/etc/profile.d/conda.sh\nMAVEN_HOME=/usr/local/sdkman/candidates/maven/current\nSDKMAN_DIR=/usr/local/sdkman\nSHLVL=2\nNVM_CD_FLAGS=\nORYX_SDK_STORAGE_BASE_URL=https://oryx-cdn.microsoft.io\nGIT_EDITOR=code --wait\nCONDA_DIR=/opt/conda\nPROMPT_DIRTRIM=4\nDOTNET_RUNNING_IN_CONTAINER=true\nSDKMAN_CANDIDATES_API=https://api.sdkman.io/2\nDOTNET_USE_POLLING_FILE_WATCHER=true\nENABLE_DYNAMIC_INSTALL=true\nMAVEN_ROOT=/home/codespace/.maven\nORYX_PREFER_USER_INSTALLED_SDKS=true\nJUPYTERLAB_PATH=/home/codespace/.local/bin\nRVM_PATH=/usr/local/rvm\nGITHUB_REPOSITORY=glen-martin-tvmsi/adam-manager\nRAILS_DEVELOPMENT_HOSTS=.githubpreview.dev,.preview.app.github.dev,.app.github.dev\nVSCODE_GIT_ASKPASS_MAIN=/vscode/bin/linux-x64/6609ac3d66f4eade5cf376d1cb76f13985724bcb/extensions/git/dist/askpass-main.js\nRUBY_ROOT=/home/codespace/.ruby\nRUBY_HOME=/usr/local/rvm/rubies/default\nBROWSER=/vscode/bin/linux-x64/6609ac3d66f4eade5cf376d1cb76f13985724bcb/bin/helpers/browser.sh\nPATH=/usr/local/rvm/gems/ruby-3.3.4/bin:/usr/local/rvm/gems/ruby-3.3.4@global/bin:/usr/local/rvm/rubies/ruby-3.3.4/bin:/vscode/bin/linux-x64/6609ac3d66f4eade5cf376d1cb76f13985724bcb/bin/remote-cli:/home/codespace/.local/bin:/home/codespace/.dotnet:/home/codespace/nvm/current/bin:/home/codespace/.php/current/bin:/home/codespace/.python/current/bin:/home/codespace/java/current/bin:/home/codespace/.ruby/current/bin:/home/codespace/.local/bin:/usr/local/python/current/bin:/usr/local/py-utils/bin:/usr/local/oryx:/usr/local/go/bin:/go/bin:/usr/local/sdkman/bin:/usr/local/sdkman/candidates/java/current/bin:/usr/local/sdkman/candidates/gradle/current/bin:/usr/local/sdkman/candidates/maven/current/bin:/usr/local/sdkman/candidates/ant/current/bin:/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:/usr/local/share/rbenv/bin:/usr/local/php/current/bin:/opt/conda/bin:/usr/local/nvs:/usr/local/share/nvm/versions/node/v20.18.1/bin:/usr/local/hugo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/share/dotnet:/home/codespace/.dotnet/tools:/usr/local/rvm/bin:/home/codespace/.vscode-remote/extensions/ms-python.debugpy-2025.4.0-linux-x64/bundled/scripts/noConfigScripts\nCODESPACE_VSCODE_FOLDER=/workspaces/adam-manager\nSDKMAN_PLATFORM=linuxx64\nNVM_BIN=/usr/local/share/nvm/versions/node/v20.18.1/bin\nIRBRC=/usr/local/rvm/rubies/ruby-3.3.4/.irbrc\nOLDPWD=/vscode/bin/linux-x64/6609ac3d66f4eade5cf376d1cb76f13985724bcb\nGOPATH=/go\nTERM_PROGRAM=vscode\nVSCODE_IPC_HOOK_CLI=/tmp/vscode-ipc-3eebca93-4b46-4a28-85b4-9c23408ba569.sock\n_=/usr/bin/env\n",
+  "architecture": ""
 }
